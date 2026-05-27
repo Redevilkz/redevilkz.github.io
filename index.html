@@ -1,0 +1,1236 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coiffure Chic – Ihr Friseursalon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        color: #2b2b2b;
+        line-height: 1.6;
+        background: #fafaf7;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 3rem;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px);
+        z-index: 100;
+        border-bottom: 1px solid #eee;
+      }
+      nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav a {
+        text-decoration: none;
+        color: #2b2b2b;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: color 0.2s;
+      }
+      nav a:hover {
+        color: #b08968;
+      }
+
+      /* Hero */
+      .hero {
+        height: 100vh;
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45)),
+          url("./main-picture.png") center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 0 1rem;
+      }
+      .hero-content h1 {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        margin-bottom: 1rem;
+      }
+      .hero-content p {
+        font-size: 1.2rem;
+        font-weight: 300;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+      }
+      .btn {
+        display: inline-block;
+        padding: 0.9rem 2.2rem;
+        background: #b08968;
+        color: white;
+        text-decoration: none;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+      }
+      .btn:hover {
+        background: #8b6a4f;
+      }
+
+      /* Sections */
+      section {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      section h2 {
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      section .subtitle {
+        text-align: center;
+        color: #888;
+        margin-bottom: 3.5rem;
+        font-style: italic;
+      }
+
+      /* Services */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      .service {
+        background: white;
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        border: 1px solid #eee;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .service:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+      .service h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+      }
+      .service .price {
+        color: #b08968;
+        font-weight: 500;
+        margin-top: 1rem;
+      }
+      .services-cta {
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      /* Price modal */
+      .price-modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+        padding: 1rem;
+      }
+      .price-modal.is-open {
+        display: flex;
+      }
+      .price-modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+      }
+      .price-modal-content {
+        position: relative;
+        width: min(1050px, 96vw);
+        max-height: 90vh;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+      }
+      .price-modal-header {
+        padding: 1rem 1.2rem;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .price-modal-header h3 {
+        font-size: 1.6rem;
+      }
+      .price-modal-close {
+        border: none;
+        background: transparent;
+        font-size: 1.6rem;
+        line-height: 1;
+        cursor: pointer;
+        color: #666;
+      }
+      .price-modal-body {
+        overflow: auto;
+        padding: 1rem 1.2rem 1.5rem;
+      }
+      .price-section {
+        margin-top: 1.4rem;
+      }
+      .price-section:first-child {
+        margin-top: 0;
+      }
+      .price-section h4 {
+        margin-bottom: 0.6rem;
+        font-size: 1.4rem;
+      }
+      .price-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+      }
+      .price-section {
+        overflow-x: auto;
+      }
+      .price-table {
+        min-width: 700px;
+      }
+      .price-table th,
+      .price-table td {
+        padding: 0.5rem 0.4rem;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+        vertical-align: top;
+      }
+      .price-table th:first-child,
+      .price-table td:first-child {
+        min-width: 250px;
+      }
+      .price-table thead th {
+        color: #666;
+        font-weight: 500;
+        background: #faf8f5;
+      }
+      .price-note {
+        margin-top: 1rem;
+        padding: 0.8rem 1rem;
+        background: #faf8f5;
+        border-left: 3px solid #b08968;
+      }
+      body.no-scroll {
+        overflow: hidden;
+      }
+
+      /* Gallery */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        position: relative;
+      }
+      .gallery img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        transition:
+          transform 0.4s,
+          filter 0.4s;
+        filter: grayscale(20%);
+      }
+      .gallery a.gallery-tile {
+        position: relative;
+        display: block;
+        overflow: hidden;
+      }
+      .gallery a.gallery-tile:hover img {
+        transform: scale(1.03);
+        filter: grayscale(0%) brightness(0.7);
+      }
+      .gallery a.gallery-tile .overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        color: white;
+        background: rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        transition: opacity 0.3s;
+        text-align: center;
+        padding: 1rem;
+      }
+      .gallery a.gallery-tile:hover .overlay {
+        opacity: 1;
+      }
+      .gallery a.gallery-tile .overlay svg {
+        width: 32px;
+        height: 32px;
+      }
+      .gallery a.gallery-tile .overlay span {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+      }
+      .gallery-cta {
+        text-align: center;
+        margin-top: 2rem;
+      }
+
+      /* About */
+      .about {
+        background: #f3ede5;
+        padding: 6rem 2rem;
+      }
+      .about-inner {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .about p {
+        font-size: 1.1rem;
+        margin-top: 1.5rem;
+      }
+
+      /* Footer */
+      footer {
+        background: #1f1f1f;
+        color: #ccc;
+        padding: 4rem 2rem 2rem;
+      }
+      .footer-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2.5rem;
+      }
+      footer h3 {
+        color: white;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+      }
+      footer p,
+      footer li {
+        font-size: 0.95rem;
+        line-height: 1.9;
+      }
+      footer ul {
+        list-style: none;
+      }
+      footer a {
+        color: #ccc;
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: #b08968;
+      }
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 3rem auto 0;
+        padding-top: 1.5rem;
+        border-top: 1px solid #333;
+        text-align: center;
+        font-size: 0.85rem;
+        color: #777;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+      }
+      .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #444;
+        border-radius: 50%;
+        color: #ccc;
+        transition:
+          color 0.2s,
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .social-links a:hover {
+        color: white;
+        border-color: #b08968;
+        background: #b08968;
+      }
+      .social-links svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      @media (max-width: 600px) {
+        nav {
+          padding: 0.85rem 0.7rem;
+        }
+        nav ul {
+          gap: 0.5rem 1rem;
+        }
+        nav a {
+          font-size: 0.72rem;
+          letter-spacing: 0.6px;
+        }
+        section {
+          padding: 4.2rem 1rem;
+        }
+        section h2 {
+          font-size: 2.1rem;
+        }
+        .hero {
+          min-height: 84vh;
+        }
+        .hero-content p {
+          font-size: 1rem;
+        }
+        .services-grid {
+          gap: 1rem;
+        }
+        .service {
+          padding: 1.6rem 1rem;
+        }
+        .service h3 {
+          font-size: 1.3rem;
+        }
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+        .gallery img {
+          height: 240px;
+        }
+        footer {
+          padding: 3.2rem 1rem 1.6rem;
+        }
+        .footer-grid {
+          gap: 1.7rem;
+        }
+        .price-table {
+          min-width: 620px;
+          font-size: 0.82rem;
+        }
+        .price-table th,
+        .price-table td {
+          padding: 0.44rem 0.35rem;
+        }
+        .price-table th:first-child,
+        .price-table td:first-child {
+          min-width: 220px;
+        }
+        .price-modal-content {
+          width: 100%;
+          max-height: 93vh;
+          border-radius: 8px;
+        }
+        .price-modal-header {
+          padding: 0.8rem 1rem;
+        }
+        .price-modal-header h3 {
+          font-size: 1.25rem;
+        }
+        .price-modal-body {
+          padding: 0.8rem 1rem 1.1rem;
+        }
+        .price-section h4 {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#ueber-uns">Über uns</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Coiffure Chic</h1>
+        <p>Dein Friseur für Stil, Schönheit und perfektes Haar</p>
+        <a href="#kontakt" class="btn">Termin vereinbaren</a>
+      </div>
+    </section>
+
+    <section id="leistungen">
+      <h2>Unsere Leistungen</h2>
+      <p class="subtitle">Professionelle Pflege für Ihr Haar</p>
+      <div class="services-grid">
+        <div class="service">
+          <h3>Damen: Waschen, Schneiden, Föhnen</h3>
+          <p>
+            Individueller Schnitt mit Styling für einen gepflegten Look im
+            Alltag.
+          </p>
+          <p class="price">ab CHF 77.00</p>
+        </div>
+        <div class="service">
+          <h3>Coloration: Ansatz färben</h3>
+          <p>
+            Professionelle Ansatzfarbe für ein gleichmäßiges, frisches Ergebnis.
+          </p>
+          <p class="price">ab CHF 54.00</p>
+        </div>
+        <div class="service">
+          <h3>Herren: Waschen, Schneiden, Föhnen</h3>
+          <p>Präziser Herrenschnitt inklusive Waschen und Finish.</p>
+          <p class="price">ab CHF 42.00</p>
+        </div>
+        <div class="service">
+          <h3>Kinder: Schneiden bis 12 Jahre</h3>
+          <p>Kindgerechter Haarschnitt mit viel Geduld und Sorgfalt.</p>
+          <p class="price">ab CHF 29.00</p>
+        </div>
+      </div>
+      <div class="services-cta">
+        <button class="btn" id="open-price-modal" type="button">
+          Detaillierte Preise ansehen
+        </button>
+      </div>
+    </section>
+
+    <section id="galerie">
+      <h2>Galerie</h2>
+      <p class="subtitle">
+        Einblicke in unsere Arbeit – folgen Sie uns auf Instagram
+      </p>
+      <div class="gallery">
+        <a
+          class="gallery-tile"
+          href="https://www.instagram.com/_coiffurechic/"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="./Screenshot 2026-05-25 at 18.27.29.png"
+            alt="Friseursalon Innenraum"
+          />
+          <div class="overlay">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+            </svg>
+            <span>@_coiffurechic</span>
+          </div>
+        </a>
+        <a
+          class="gallery-tile"
+          href="https://www.instagram.com/_coiffurechic/"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="./Screenshot 2026-05-25 at 18.27.46.png"
+            alt="Haarschnitt"
+          />
+          <div class="overlay">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+            </svg>
+            <span>@_coiffurechic</span>
+          </div>
+        </a>
+        <a
+          class="gallery-tile"
+          href="https://www.instagram.com/_coiffurechic/"
+          target="_blank"
+          rel="noopener"
+        >
+          <img src="./Screenshot 2026-05-25 at 18.27.58.png" alt="Frisur" />
+          <div class="overlay">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+            </svg>
+            <span>@_coiffurechic</span>
+          </div>
+        </a>
+        <a
+          class="gallery-tile"
+          href="https://www.instagram.com/_coiffurechic/"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="./Screenshot 2026-05-25 at 18.28.20.png"
+            alt="Stylingprodukte"
+          />
+          <div class="overlay">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+            </svg>
+            <span>@_coiffurechic</span>
+          </div>
+        </a>
+        <a
+          class="gallery-tile"
+          href="https://www.instagram.com/_coiffurechic/"
+          target="_blank"
+          rel="noopener"
+        >
+          <img src="./Screenshot 2026-05-25 at 18.28.40.png" alt="Haarfarbe" />
+          <div class="overlay">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+            </svg>
+            <span>@_coiffurechic</span>
+          </div>
+        </a>
+        <a
+          class="gallery-tile"
+          href="https://www.instagram.com/_coiffurechic/"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="./Screenshot 2026-05-25 at 18.30.14.png"
+            alt="Salon Atmosphäre"
+          />
+          <div class="overlay">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+            </svg>
+            <span>@_coiffurechic</span>
+          </div>
+        </a>
+      </div>
+      <div class="gallery-cta">
+        <a
+          class="btn"
+          href="https://www.instagram.com/_coiffurechic/"
+          target="_blank"
+          rel="noopener"
+          >Auf Instagram ansehen</a
+        >
+      </div>
+    </section>
+
+    <section id="ueber-uns" class="about">
+      <div class="about-inner">
+        <h2>Über uns</h2>
+        <p class="subtitle">Leidenschaft für Haare seit über 20 Jahren</p>
+        <p>
+          Bei Coiffure Chic verbinden wir handwerkliches Können mit kreativer
+          Vision. Unser erfahrenes Team nimmt sich Zeit für eine individuelle
+          Beratung und sorgt dafür, dass Sie sich vom ersten Moment an
+          wohlfühlen. Wir verwenden ausschließlich hochwertige Produkte und
+          legen großen Wert auf Nachhaltigkeit.
+        </p>
+      </div>
+    </section>
+
+    <footer id="kontakt">
+      <div class="footer-grid">
+        <div>
+          <h3>Coiffure Chic</h3>
+          <p>Ihr Friseursalon für Stil und Eleganz – herzlich willkommen.</p>
+        </div>
+        <div>
+          <h3>Kontakt</h3>
+          <p>Hauptstrasse 93<br />4450 Sissach</p>
+          <p>Tel: <a href="tel:+41619715141">061 971 51 41</a><br /></p>
+        </div>
+        <div>
+          <h3>Öffnungszeiten</h3>
+          <ul>
+            <li>Montag: geschlossen</li>
+            <li>Dienstag bis Freitag: 08:00 - 12:00, 13:00 - 18:00</li>
+            <li>Samstag: 07:00 - 14:00</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Folgen Sie uns</h3>
+          <ul class="social-links">
+            <li>
+              <a
+                href="https://www.instagram.com/_coiffurechic/"
+                target="_blank"
+                rel="noopener"
+                aria-label="Instagram"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/CoiffureChicSissach/"
+                target="_blank"
+                rel="noopener"
+                aria-label="Facebook"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.6 1.6-1.6h1.7V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.6H7.7V14h2.7v8h3.1z"
+                  />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 Coiffure Chic · Alle Rechte vorbehalten ·
+        <a href="#">Impressum</a> · <a href="#">Datenschutz</a>
+      </div>
+    </footer>
+
+    <div
+      id="price-modal"
+      class="price-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="price-modal-title"
+      aria-hidden="true"
+    >
+      <div class="price-modal-backdrop" data-close-price-modal="true"></div>
+      <div class="price-modal-content">
+        <div class="price-modal-header">
+          <h3 id="price-modal-title">Detaillierte Preisliste</h3>
+          <button
+            class="price-modal-close"
+            id="close-price-modal"
+            type="button"
+            aria-label="Schließen"
+          >
+            ×
+          </button>
+        </div>
+        <div class="price-modal-body">
+          <section class="price-section">
+            <h4>Damen</h4>
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>Leistung</th>
+                  <th>Währung</th>
+                  <th>Bis Kinnlang</th>
+                  <th>Ab Kinnlang</th>
+                  <th>Ab Schulterlang</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Waschen, Schneiden, Föhnen / Legen</td>
+                  <td>CHF</td>
+                  <td>77.00</td>
+                  <td>84.00</td>
+                  <td>90.00</td>
+                </tr>
+                <tr>
+                  <td>Waschen, Schneiden selber Föhnen</td>
+                  <td>CHF</td>
+                  <td>56.00</td>
+                  <td>56.00</td>
+                  <td>56.00</td>
+                </tr>
+                <tr>
+                  <td>Trockenschneiden, ohne Waschen &amp; Föhnen</td>
+                  <td>CHF</td>
+                  <td>45.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Schneiden nass &amp; Föhnen</td>
+                  <td>CHF</td>
+                  <td>69.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Waschen, Föhnen, Legen</td>
+                  <td>CHF</td>
+                  <td>41.00</td>
+                  <td>47.00</td>
+                  <td>53.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="price-section">
+            <h4>Coloration</h4>
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>Leistung</th>
+                  <th>Währung</th>
+                  <th>Bis Kinnlang</th>
+                  <th>Ab Kinnlang</th>
+                  <th>Ab Schulterlang</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ansatz färben / blondieren</td>
+                  <td>CHF</td>
+                  <td>54.00</td>
+                  <td>54.00</td>
+                  <td>54.00</td>
+                </tr>
+                <tr>
+                  <td>Ansatz färben (ammoniakfrei)</td>
+                  <td>CHF</td>
+                  <td>59.00</td>
+                  <td>59.00</td>
+                  <td>59.00</td>
+                </tr>
+                <tr>
+                  <td>Farbe ganzer Kopf</td>
+                  <td>CHF</td>
+                  <td>66.00</td>
+                  <td>69.00</td>
+                  <td>73.00</td>
+                </tr>
+                <tr>
+                  <td>Farbe ganzer Kopf (ammoniakfrei) * ELUMEN</td>
+                  <td>CHF</td>
+                  <td>64.00</td>
+                  <td>71.00</td>
+                  <td>79.00</td>
+                </tr>
+                <tr>
+                  <td>Ansatz färben Längenausgleich mit Tönung</td>
+                  <td>CHF</td>
+                  <td>66.00</td>
+                  <td>73.00</td>
+                  <td>81.00</td>
+                </tr>
+                <tr>
+                  <td>
+                    Ansatz färben (ammoniakfrei) Längenausgleich mit Tönung
+                  </td>
+                  <td>CHF</td>
+                  <td>73.00</td>
+                  <td>80.00</td>
+                  <td>88.00</td>
+                </tr>
+                <tr>
+                  <td>Tönung / Glanztönung</td>
+                  <td>CHF</td>
+                  <td>28.00</td>
+                  <td>33.00</td>
+                  <td>38.00</td>
+                </tr>
+                <tr>
+                  <td>Intensivtönung mit langer Haltbarkeit</td>
+                  <td>CHF</td>
+                  <td>48.00</td>
+                  <td>53.00</td>
+                  <td>58.00</td>
+                </tr>
+                <tr>
+                  <td>Farbe / Material Zuschlag / Arbeitsaufwand</td>
+                  <td>CHF</td>
+                  <td>10.00</td>
+                  <td>15.00</td>
+                  <td>20.00</td>
+                </tr>
+                <tr>
+                  <td>Folienmèches Oberkopf</td>
+                  <td>CHF</td>
+                  <td>64.00</td>
+                  <td>85.00</td>
+                  <td>106.00</td>
+                </tr>
+                <tr>
+                  <td>Folienmèches ganzer Kopf</td>
+                  <td>CHF</td>
+                  <td>87.00</td>
+                  <td>110.00</td>
+                  <td>131.00</td>
+                </tr>
+                <tr>
+                  <td>Balayage ohne Tönung</td>
+                  <td>CHF</td>
+                  <td></td>
+                  <td>125.00</td>
+                  <td>143.00</td>
+                </tr>
+                <tr>
+                  <td>Blondieren ganzer Kopf</td>
+                  <td>CHF</td>
+                  <td>80.00</td>
+                  <td>90.00</td>
+                  <td>105.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="price-section">
+            <h4>Umformungen</h4>
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>Leistung</th>
+                  <th>Währung</th>
+                  <th>Bis Kinnlang</th>
+                  <th>Ab Kinnlang</th>
+                  <th>Ab Schulterlang</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Dauerhafte Umformung</td>
+                  <td>CHF</td>
+                  <td>90.00</td>
+                  <td>100.00</td>
+                  <td>105.00</td>
+                </tr>
+                <tr>
+                  <td>Volumenwelle / Teildauerwelle</td>
+                  <td>CHF</td>
+                  <td>80.00</td>
+                  <td>85.00</td>
+                  <td>95.00</td>
+                </tr>
+                <tr>
+                  <td>Keratinglättung, inkl. Schnitt &amp; Föhnen</td>
+                  <td>CHF</td>
+                  <td>375.00</td>
+                  <td>425.00</td>
+                  <td>475.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="price-section">
+            <h4>Pflegeprodukte / Sonstiges</h4>
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>Leistung</th>
+                  <th>Währung</th>
+                  <th>Bis Kinnlang</th>
+                  <th>Ab Kinnlang</th>
+                  <th>Ab Schulterlang</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Spülung / Feuchtigkeitspflege</td>
+                  <td>CHF</td>
+                  <td>4.00</td>
+                  <td>5.00</td>
+                  <td>8.00</td>
+                </tr>
+                <tr>
+                  <td>Maske</td>
+                  <td>CHF</td>
+                  <td>12.00</td>
+                  <td>15.00</td>
+                  <td>18.00</td>
+                </tr>
+                <tr>
+                  <td>Olaplex Nummer 1 + 2 bei Coloration + Mèches</td>
+                  <td>CHF</td>
+                  <td>13.00</td>
+                  <td>13.00</td>
+                  <td>18.00</td>
+                </tr>
+                <tr>
+                  <td>Olaplex Nummer 1 + 2 für den Haaraufbau</td>
+                  <td>CHF</td>
+                  <td>32.00</td>
+                  <td>32.00</td>
+                  <td>42.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="price-section">
+            <h4>Kosmetik</h4>
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>Leistung</th>
+                  <th>Währung</th>
+                  <th>Bis Kinnlang</th>
+                  <th>Ab Kinnlang</th>
+                  <th>Ab Schulterlang</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Wimpern färben</td>
+                  <td>CHF</td>
+                  <td>20.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Augenbrauen färben / zupfen</td>
+                  <td>CHF</td>
+                  <td>16.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Augenbrauen färben &amp; zupfen</td>
+                  <td>CHF</td>
+                  <td>10.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Aufsteckfrisuren im Minuten-Aufwand</td>
+                  <td>CHF</td>
+                  <td>1.50</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Hochzeitsfrisur, inkl. 1 Probefrisur</td>
+                  <td>CHF</td>
+                  <td>180.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="price-section">
+            <h4>Herren</h4>
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>Leistung</th>
+                  <th>Währung</th>
+                  <th>Bis Kinnlang</th>
+                  <th>Ab Kinnlang</th>
+                  <th>Ab Schulterlang</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Waschen, Schneiden</td>
+                  <td>CHF</td>
+                  <td>42.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Trockenhaarschnitt</td>
+                  <td>CHF</td>
+                  <td>36.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Maschinen / Kranzhaarschnitt</td>
+                  <td>CHF</td>
+                  <td>29.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Alle andern DL-Preise wie Damen bis kinnlanges Haar</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="price-section">
+            <h4>Kinder</h4>
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>Leistung</th>
+                  <th>Währung</th>
+                  <th>Bis Kinnlang</th>
+                  <th>Ab Kinnlang</th>
+                  <th>Ab Schulterlang</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Waschen, Schneiden, Stylen, Jungen</td>
+                  <td>CHF</td>
+                  <td>33.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Nur Waschen Mädchen</td>
+                  <td>CHF</td>
+                  <td>6.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Schneiden bis 12 Jahre</td>
+                  <td>CHF</td>
+                  <td>29.00</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    Mädchen 13 - 16 Jahre Waschen, Schneiden, Föhnen, oder
+                    Pflege
+                  </td>
+                  <td>CHF</td>
+                  <td>42.00</td>
+                  <td>47.00</td>
+                  <td>52.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <p class="price-note">
+            Lehrlinge &amp; Studenten erhalten auf den Erwachsenen-Preis 10%.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const openPriceModalButton = document.getElementById("open-price-modal");
+      const closePriceModalButton =
+        document.getElementById("close-price-modal");
+      const priceModal = document.getElementById("price-modal");
+
+      function openPriceModal() {
+        priceModal.classList.add("is-open");
+        priceModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("no-scroll");
+      }
+
+      function closePriceModal() {
+        priceModal.classList.remove("is-open");
+        priceModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("no-scroll");
+      }
+
+      openPriceModalButton.addEventListener("click", openPriceModal);
+      closePriceModalButton.addEventListener("click", closePriceModal);
+
+      priceModal.addEventListener("click", (event) => {
+        if (event.target.matches("[data-close-price-modal='true']")) {
+          closePriceModal();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (
+          event.key === "Escape" &&
+          priceModal.classList.contains("is-open")
+        ) {
+          closePriceModal();
+        }
+      });
+    </script>
+  </body>
+</html>

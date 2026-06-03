@@ -1,1244 +1,920 @@
-<!doctype html>
-<html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coiffure Chic – Ihr Friseursalon</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La tua prossima avventura ti aspetta</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: "Inter", sans-serif;
-        color: #2b2b2b;
-        line-height: 1.6;
-        background: #fafaf7;
-      }
-      h1,
-      h2,
-      h3 {
-        font-family: "Cormorant Garamond", serif;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-      }
+        :root {
+            --easyjet-orange: #FF6B00;
+            --easyjet-orange-dark: #E55F00;
+            --easyjet-orange-light: #FFF1E6;
+            --easyjet-white: #FFFFFF;
+            --easyjet-dark: #1A1A1A;
+            --easyjet-gray: #6B6B6B;
+            --easyjet-light-gray: #F5F5F5;
+            --easyjet-border: #E8E8E8;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 22px;
+            --radius-xl: 28px;
+            --transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+        }
 
-      /* Navigation */
-      nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem 3rem;
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(8px);
-        z-index: 100;
-        border-bottom: 1px solid #eee;
-      }
-      nav ul {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      nav a {
-        text-decoration: none;
-        color: #2b2b2b;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: color 0.2s;
-      }
-      nav a:hover {
-        color: #b08968;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      /* Hero */
-      .hero {
-        height: 100vh;
-        background:
-          linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45)),
-          url("./main-picture.png") center/cover;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-        padding: 0 1rem;
-      }
-      .hero-content h1 {
-        font-size: clamp(2.5rem, 6vw, 5rem);
-        margin-bottom: 1rem;
-      }
-      .hero-content p {
-        font-size: 1.2rem;
-        font-weight: 300;
-        max-width: 600px;
-        margin: 0 auto 2rem;
-      }
-      .btn {
-        display: inline-block;
-        padding: 0.9rem 2.2rem;
-        background: #b08968;
-        color: white;
-        text-decoration: none;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        transition: background 0.3s;
-      }
-      .btn:hover {
-        background: #8b6a4f;
-      }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #F8F6F3;
+            background-image:
+                radial-gradient(ellipse at 15% 20%, rgba(255, 107, 0, 0.04) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 75%, rgba(255, 107, 0, 0.03) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 107, 0, 0.02) 0%, transparent 70%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-      /* Sections */
-      section {
-        padding: 6rem 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      section h2 {
-        font-size: 2.8rem;
-        text-align: center;
-        margin-bottom: 1rem;
-      }
-      section .subtitle {
-        text-align: center;
-        color: #888;
-        margin-bottom: 3.5rem;
-        font-style: italic;
-      }
+        /* ========== MAIN CONTAINER ========== */
+        .app-container {
+            width: 100%;
+            max-width: 520px;
+            position: relative;
+        }
 
-      /* Services */
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-      }
-      .service {
-        background: white;
-        padding: 2.5rem 1.5rem;
-        text-align: center;
-        border: 1px solid #eee;
-        transition:
-          transform 0.3s,
-          box-shadow 0.3s;
-      }
-      .service:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      }
-      .service h3 {
-        font-size: 1.5rem;
-        margin-bottom: 0.8rem;
-      }
-      .service .price {
-        color: #b08968;
-        font-weight: 500;
-        margin-top: 1rem;
-      }
-      .services-cta {
-        margin-top: 2rem;
-        text-align: center;
-      }
+        /* ========== PASSCODE SCREEN ========== */
+        .passcode-screen {
+            background: var(--easyjet-white);
+            border-radius: var(--radius-xl);
+            padding: 44px 32px 38px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
 
-      /* Price modal */
-      .price-modal {
-        position: fixed;
-        inset: 0;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 200;
-        padding: 1rem;
-      }
-      .price-modal.is-open {
-        display: flex;
-      }
-      .price-modal-backdrop {
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.55);
-      }
-      .price-modal-content {
-        position: relative;
-        width: min(1050px, 96vw);
-        max-height: 90vh;
-        background: #fff;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
-        display: flex;
-        flex-direction: column;
-      }
-      .price-modal-header {
-        padding: 1rem 1.2rem;
-        border-bottom: 1px solid #eee;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-      .price-modal-header h3 {
-        font-size: 1.6rem;
-      }
-      .price-modal-close {
-        border: none;
-        background: transparent;
-        font-size: 1.6rem;
-        line-height: 1;
-        cursor: pointer;
-        color: #666;
-      }
-      .price-modal-body {
-        overflow: auto;
-        padding: 1rem 1.2rem 1.5rem;
-      }
-      .price-section {
-        margin-top: 1.4rem;
-      }
-      .price-section:first-child {
-        margin-top: 0;
-      }
-      .price-section h4 {
-        margin-bottom: 0.6rem;
-        font-size: 1.4rem;
-      }
-      .price-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.92rem;
-      }
-      .price-section {
-        overflow-x: auto;
-      }
-      .price-table {
-        min-width: 700px;
-      }
-      .price-table th,
-      .price-table td {
-        padding: 0.5rem 0.4rem;
-        border-bottom: 1px solid #eee;
-        text-align: left;
-        vertical-align: top;
-      }
-      .price-table th:first-child,
-      .price-table td:first-child {
-        min-width: 250px;
-      }
-      .price-table thead th {
-        color: #666;
-        font-weight: 500;
-        background: #faf8f5;
-      }
-      .price-note {
-        margin-top: 1rem;
-        padding: 0.8rem 1rem;
-        background: #faf8f5;
-        border-left: 3px solid #b08968;
-      }
-      body.no-scroll {
-        overflow: hidden;
-      }
+        .passcode-screen.hidden {
+            opacity: 0;
+            transform: translateY(-30px) scale(0.94);
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+        }
 
-      /* Gallery */
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1rem;
-        position: relative;
-      }
-      .gallery img {
-        width: 100%;
-        height: 320px;
-        object-fit: cover;
-        transition:
-          transform 0.4s,
-          filter 0.4s;
-        filter: grayscale(20%);
-      }
-      .gallery a.gallery-tile {
-        position: relative;
-        display: block;
-        overflow: hidden;
-      }
-      .gallery a.gallery-tile:hover img {
-        transform: scale(1.03);
-        filter: grayscale(0%) brightness(0.7);
-      }
-      .gallery a.gallery-tile .overlay {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.4rem;
-        color: white;
-        background: rgba(0, 0, 0, 0.25);
-        opacity: 0;
-        transition: opacity 0.3s;
-        text-align: center;
-        padding: 1rem;
-      }
-      .gallery a.gallery-tile:hover .overlay {
-        opacity: 1;
-      }
-      .gallery a.gallery-tile .overlay svg {
-        width: 32px;
-        height: 32px;
-      }
-      .gallery a.gallery-tile .overlay span {
-        font-size: 0.9rem;
-        letter-spacing: 1px;
-      }
-      .gallery-cta {
-        text-align: center;
-        margin-top: 2rem;
-      }
+        .passcode-screen .airplane-icon-top {
+            font-size: 52px;
+            margin-bottom: 8px;
+            display: block;
+            animation: floatPlane 3.5s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(255, 107, 0, 0.2));
+        }
 
-      /* About */
-      .about {
-        background: #f3ede5;
-        padding: 6rem 2rem;
-      }
-      .about-inner {
-        max-width: 800px;
-        margin: 0 auto;
-        text-align: center;
-      }
-      .about p {
-        font-size: 1.1rem;
-        margin-top: 1.5rem;
-      }
+        @keyframes floatPlane {
+            0%,
+            100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            30% {
+                transform: translateY(-14px) rotate(-2deg);
+            }
+            60% {
+                transform: translateY(-6px) rotate(-7deg);
+            }
+            85% {
+                transform: translateY(-2px) rotate(-4deg);
+            }
+        }
 
-      /* Footer */
-      footer {
-        background: #1f1f1f;
-        color: #ccc;
-        padding: 4rem 2rem 2rem;
-      }
-      .footer-grid {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 2.5rem;
-      }
-      footer h3 {
-        color: white;
-        font-size: 1.4rem;
-        margin-bottom: 1rem;
-      }
-      footer p,
-      footer li {
-        font-size: 0.95rem;
-        line-height: 1.9;
-      }
-      footer ul {
-        list-style: none;
-      }
-      footer a {
-        color: #ccc;
-        text-decoration: none;
-      }
-      footer a:hover {
-        color: #b08968;
-      }
-      .footer-bottom {
-        max-width: 1200px;
-        margin: 3rem auto 0;
-        padding-top: 1.5rem;
-        border-top: 1px solid #333;
-        text-align: center;
-        font-size: 0.85rem;
-        color: #777;
-      }
+        .passcode-screen .brand-strip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--easyjet-orange);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
 
-      .social-links {
-        display: flex;
-        gap: 1rem;
-        list-style: none;
-      }
-      .social-links a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        border: 1px solid #444;
-        border-radius: 50%;
-        color: #ccc;
-        transition:
-          color 0.2s,
-          border-color 0.2s,
-          background 0.2s;
-      }
-      .social-links a:hover {
-        color: white;
-        border-color: #b08968;
-        background: #b08968;
-      }
-      .social-links svg {
-        width: 18px;
-        height: 18px;
-      }
+        .passcode-screen .brand-dot {
+            position: absolute;
+            top: 16px;
+            right: 24px;
+            width: 10px;
+            height: 10px;
+            background: var(--easyjet-orange);
+            border-radius: 50%;
+            animation: pulseDot 2s ease-in-out infinite;
+        }
 
-      @media (max-width: 600px) {
-        nav {
-          padding: 0.85rem 0.7rem;
+        @keyframes pulseDot {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 0 16px rgba(255, 107, 0, 0);
+            }
         }
-        nav ul {
-          gap: 0.5rem 1rem;
+
+        .passcode-screen h2 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--easyjet-dark);
+            letter-spacing: -0.3px;
+            margin-bottom: 6px;
         }
-        nav a {
-          font-size: 0.72rem;
-          letter-spacing: 0.6px;
+
+        .passcode-screen .subtitle {
+            font-size: 0.9rem;
+            color: var(--easyjet-gray);
+            margin-bottom: 26px;
+            letter-spacing: 0.1px;
         }
-        section {
-          padding: 4.2rem 1rem;
+
+        .passcode-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            max-width: 300px;
         }
-        section h2 {
-          font-size: 2.1rem;
+
+        .passcode-input-wrapper input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1.35rem;
+            letter-spacing: 4px;
+            text-align: center;
+            border: 2.5px solid var(--easyjet-border);
+            border-radius: 50px;
+            background: var(--easyjet-light-gray);
+            color: var(--easyjet-dark);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            outline: none;
+            font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
+            text-transform: uppercase;
         }
-        .hero {
-          min-height: 84vh;
+
+        .passcode-input-wrapper input:focus {
+            border-color: var(--easyjet-orange);
+            background: var(--easyjet-white);
+            box-shadow: 0 0 0 10px rgba(255, 107, 0, 0.06);
         }
-        .hero-content p {
-          font-size: 1rem;
+
+        .passcode-input-wrapper input.error-shake {
+            animation: shakeInput 0.5s ease;
+            border-color: #E74C3C !important;
+            background: #FFF5F5 !important;
+            box-shadow: 0 0 0 10px rgba(231, 76, 60, 0.06) !important;
         }
-        .services-grid {
-          gap: 1rem;
+
+        @keyframes shakeInput {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            15% {
+                transform: translateX(-8px);
+            }
+            30% {
+                transform: translateX(8px);
+            }
+            45% {
+                transform: translateX(-6px);
+            }
+            60% {
+                transform: translateX(5px);
+            }
+            75% {
+                transform: translateX(-3px);
+            }
+            90% {
+                transform: translateX(2px);
+            }
         }
-        .service {
-          padding: 1.6rem 1rem;
+
+        .passcode-input-wrapper .lock-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
+            color: #B0B0B0;
+            pointer-events: none;
+            transition: color 0.3s ease;
         }
-        .service h3 {
-          font-size: 1.3rem;
+
+        .passcode-input-wrapper input:focus~.lock-icon,
+        .passcode-input-wrapper input:focus+.lock-icon {
+            color: var(--easyjet-orange);
         }
-        .gallery {
-          grid-template-columns: 1fr;
+
+        .passcode-submit-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 16px auto 0;
+            padding: 15px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--easyjet-white);
+            background: var(--easyjet-orange);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.3);
         }
-        .gallery img {
-          height: 240px;
+
+        .passcode-submit-btn:hover {
+            background: var(--easyjet-orange-dark);
+            box-shadow: 0 10px 28px rgba(255, 107, 0, 0.4);
+            transform: translateY(-2px);
         }
-        footer {
-          padding: 3.2rem 1rem 1.6rem;
+        .passcode-submit-btn:active {
+            transform: scale(0.96);
+            box-shadow: 0 3px 10px rgba(255, 107, 0, 0.3);
         }
-        .footer-grid {
-          gap: 1.7rem;
+
+        .error-message {
+            color: #E74C3C;
+            font-size: 0.82rem;
+            margin-top: 10px;
+            font-weight: 500;
+            min-height: 20px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.2px;
         }
-        .price-table {
-          min-width: 620px;
-          font-size: 0.82rem;
+
+        /* ========== TRAVEL INFO SCREEN ========== */
+        .travel-screen {
+            background: var(--easyjet-white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transition: all 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px) scale(0.94);
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            top: 0;
         }
-        .price-table th,
-        .price-table td {
-          padding: 0.44rem 0.35rem;
+
+        .travel-screen.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+            position: relative;
         }
-        .price-table th:first-child,
-        .price-table td:first-child {
-          min-width: 220px;
+
+        /* Header strip */
+        .travel-header-strip {
+            background: var(--easyjet-orange);
+            padding: 20px 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
         }
-        .price-modal-content {
-          width: 100%;
-          max-height: 93vh;
-          border-radius: 8px;
+
+        .travel-header-strip::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
         }
-        .price-modal-header {
-          padding: 0.8rem 1rem;
+        .travel-header-strip::before {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: -20px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
         }
-        .price-modal-header h3 {
-          font-size: 1.25rem;
+
+        .travel-header-strip .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1;
         }
-        .price-modal-body {
-          padding: 0.8rem 1rem 1.1rem;
+        .travel-header-strip .logo-circle {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--easyjet-orange);
+            letter-spacing: -1px;
         }
-        .price-section h4 {
-          font-size: 1.2rem;
+        .travel-header-strip .logo-text {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.3px;
         }
-      }
+        .travel-header-strip .flight-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Boarding pass body */
+        .boarding-pass-body {
+            padding: 26px 24px 18px;
+            position: relative;
+        }
+
+        .boarding-pass-body::after {
+            content: '';
+            position: absolute;
+            left: 24px;
+            right: 24px;
+            bottom: 0;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, var(--easyjet-border) 0, var(--easyjet-border) 8px, transparent 8px, transparent 18px);
+        }
+
+        .flight-route {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 10px;
+        }
+        .flight-route .city-code {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--easyjet-dark);
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+        .flight-route .route-arrow {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--easyjet-orange);
+            font-size: 1.3rem;
+        }
+        .flight-route .route-arrow .line-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--easyjet-orange);
+            border-radius: 50%;
+        }
+        .flight-route .route-arrow .line-seg {
+            width: 30px;
+            height: 2px;
+            background: var(--easyjet-orange);
+            border-radius: 1px;
+        }
+        .flight-route .route-plane {
+            font-size: 1.5rem;
+            animation: flyAcross 2s ease-in-out infinite;
+        }
+        @keyframes flyAcross {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(6px);
+            }
+        }
+
+        .flight-meta-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 0 6px;
+        }
+        .flight-meta-item {
+            text-align: center;
+            flex: 1;
+            min-width: 60px;
+        }
+        .flight-meta-item .meta-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--easyjet-gray);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .flight-meta-item .meta-value {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--easyjet-dark);
+            margin-top: 2px;
+            letter-spacing: -0.2px;
+        }
+
+        /* Info cards */
+        .info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 4px 0 20px;
+        }
+
+        .info-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--easyjet-light-gray);
+            padding: 14px 16px;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            border: 1.5px solid transparent;
+        }
+        .info-card:hover {
+            background: var(--easyjet-white);
+            border-color: var(--easyjet-orange);
+            box-shadow: var(--shadow-sm);
+            transform: translateX(3px);
+        }
+        .info-card .card-emoji {
+            font-size: 2rem;
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: var(--shadow-sm);
+        }
+        .info-card .card-content {
+            flex: 1;
+        }
+        .info-card .card-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--easyjet-dark);
+            letter-spacing: -0.2px;
+        }
+        .info-card .card-detail {
+            font-size: 0.8rem;
+            color: var(--easyjet-gray);
+            margin-top: 1px;
+        }
+
+        /* Weather strip */
+        .weather-strip {
+            background: linear-gradient(135deg, #FFF7F0 0%, #FFE8D6 100%);
+            margin: 0 24px 10px;
+            padding: 16px 18px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1.5px solid #FFE0C8;
+        }
+        .weather-strip .weather-icon-large {
+            font-size: 2.6rem;
+            flex-shrink: 0;
+            animation: gentlePulse 3s ease-in-out infinite;
+        }
+        @keyframes gentlePulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.12);
+            }
+        }
+        .weather-strip .weather-details {
+            flex: 1;
+        }
+        .weather-strip .weather-temp-day {
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--easyjet-dark);
+            letter-spacing: -0.3px;
+        }
+        .weather-strip .weather-temp-night {
+            font-size: 0.85rem;
+            color: var(--easyjet-gray);
+            font-weight: 500;
+        }
+        .weather-strip .weather-sun {
+            font-size: 0.75rem;
+            color: var(--easyjet-orange);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .travel-footer {
+            padding: 16px 24px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .travel-footer .footer-barcode {
+            display: flex;
+            gap: 2px;
+            align-items: flex-end;
+        }
+        .travel-footer .barcode-line {
+            width: 2.5px;
+            background: var(--easyjet-dark);
+            border-radius: 1px;
+        }
+        .travel-footer .footer-note {
+            font-size: 0.7rem;
+            color: var(--easyjet-gray);
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .travel-footer .footer-emoji {
+            font-size: 1.4rem;
+        }
+
+        /* Confetti particles */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            animation: confettiFall 2.5s ease-out forwards;
+        }
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-120px) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(720deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .passcode-screen {
+                padding: 32px 18px 28px;
+                border-radius: var(--radius-lg);
+            }
+            .passcode-screen h2 {
+                font-size: 1.3rem;
+            }
+            .passcode-input-wrapper input {
+                font-size: 1.1rem;
+                padding: 14px 16px;
+                letter-spacing: 3px;
+            }
+            .flight-route .city-code {
+                font-size: 2.2rem;
+                letter-spacing: -1px;
+            }
+            .boarding-pass-body {
+                padding: 18px 14px 10px;
+            }
+            .travel-header-strip {
+                padding: 16px 18px;
+            }
+            .info-card {
+                padding: 10px 12px;
+                gap: 10px;
+            }
+            .info-card .card-emoji {
+                font-size: 1.6rem;
+                width: 36px;
+                height: 36px;
+            }
+            .weather-strip {
+                margin: 0 14px 8px;
+                padding: 12px 14px;
+            }
+            .travel-footer {
+                padding: 10px 14px 16px;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <nav>
-      <ul>
-        <li><a href="#leistungen">Leistungen</a></li>
-        <li><a href="#galerie">Galerie</a></li>
-        <li><a href="#ueber-uns">Über uns</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-      </ul>
-    </nav>
+</head>
+<body>
 
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Coiffure Chic</h1>
-        <p>Dein Friseur für Stil, Schönheit und perfektes Haar</p>
-        <a href="#kontakt" class="btn">Termin vereinbaren</a>
-      </div>
-    </section>
-
-    <section id="leistungen">
-      <h2>Unsere Leistungen</h2>
-      <p class="subtitle">Professionelle Pflege für Ihr Haar</p>
-      <div class="services-grid">
-        <div class="service">
-          <h3>Damen: Waschen, Schneiden, Föhnen</h3>
-          <p>
-            Individueller Schnitt mit Styling für einen gepflegten Look im
-            Alltag.
-          </p>
-          <p class="price">ab CHF 77.00</p>
-        </div>
-        <div class="service">
-          <h3>Coloration: Ansatz färben</h3>
-          <p>
-            Professionelle Ansatzfarbe für ein gleichmäßiges, frisches Ergebnis.
-          </p>
-          <p class="price">ab CHF 54.00</p>
-        </div>
-
-        <div class="service">
-          <h3>Herren: Waschen, Schneiden</h3>
-          <p>Präziser Herrenschnitt inklusive Waschen und Finish.</p>
-          <p class="price">ab CHF 42.00</p>
-        </div>
-        <div class="service">
-          <h3>Kinder: Schneiden bis 12 Jahre</h3>
-          <p>Kindgerechter Haarschnitt mit viel Geduld und Sorgfalt.</p>
-          <p class="price">ab CHF 29.00</p>
-        </div>
-      </div>
-      <div class="services-cta">
-        <button class="btn" id="open-price-modal" type="button">
-          Detaillierte Preise ansehen
-        </button>
-      </div>
-    </section>
-
-    <section id="galerie">
-      <h2>Galerie</h2>
-      <p class="subtitle">
-        Einblicke in unsere Arbeit – folgen Sie uns auf Instagram
-      </p>
-      <div class="gallery">
-        <a
-          class="gallery-tile"
-          href="https://www.instagram.com/_coiffurechic/"
-          target="_blank"
-          rel="noopener"
-        >
-          <img
-            src="./Screenshot 2026-05-25 at 18.27.29.png"
-            alt="Friseursalon Innenraum"
-          />
-          <div class="overlay">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-            </svg>
-            <span>@_coiffurechic</span>
-          </div>
-        </a>
-        <a
-          class="gallery-tile"
-          href="https://www.instagram.com/_coiffurechic/"
-          target="_blank"
-          rel="noopener"
-        >
-          <img
-            src="./Screenshot 2026-05-25 at 18.27.46.png"
-            alt="Haarschnitt"
-          />
-          <div class="overlay">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-            </svg>
-            <span>@_coiffurechic</span>
-          </div>
-        </a>
-        <a
-          class="gallery-tile"
-          href="https://www.instagram.com/_coiffurechic/"
-          target="_blank"
-          rel="noopener"
-        >
-          <img src="./Screenshot 2026-05-25 at 18.27.58.png" alt="Frisur" />
-          <div class="overlay">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-            </svg>
-            <span>@_coiffurechic</span>
-          </div>
-        </a>
-        <a
-          class="gallery-tile"
-          href="https://www.instagram.com/_coiffurechic/"
-          target="_blank"
-          rel="noopener"
-        >
-          <img
-            src="./Screenshot 2026-05-25 at 18.28.20.png"
-            alt="Stylingprodukte"
-          />
-          <div class="overlay">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-            </svg>
-            <span>@_coiffurechic</span>
-          </div>
-        </a>
-        <a
-          class="gallery-tile"
-          href="https://www.instagram.com/_coiffurechic/"
-          target="_blank"
-          rel="noopener"
-        >
-          <img src="./Screenshot 2026-05-25 at 18.28.40.png" alt="Haarfarbe" />
-          <div class="overlay">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-            </svg>
-            <span>@_coiffurechic</span>
-          </div>
-        </a>
-        <a
-          class="gallery-tile"
-          href="https://www.instagram.com/_coiffurechic/"
-          target="_blank"
-          rel="noopener"
-        >
-          <img
-            src="./Screenshot 2026-05-25 at 18.30.14.png"
-            alt="Salon Atmosphäre"
-          />
-          <div class="overlay">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-            </svg>
-            <span>@_coiffurechic</span>
-          </div>
-        </a>
-      </div>
-      <div class="gallery-cta">
-        <a
-          class="btn"
-          href="https://www.instagram.com/_coiffurechic/"
-          target="_blank"
-          rel="noopener"
-          >Auf Instagram ansehen</a
-        >
-      </div>
-    </section>
-
-    <section id="ueber-uns" class="about">
-      <div class="about-inner">
-        <h2>Über uns</h2>
-        <p class="subtitle">Leidenschaft für Haare seit über 20 Jahren</p>
-        <p>
-          Bei Coiffure Chic verbinden wir handwerkliches Können mit kreativer
-          Vision. Unser erfahrenes Team nimmt sich Zeit für eine individuelle
-          Beratung und sorgt dafür, dass Sie sich vom ersten Moment an
-          wohlfühlen. Wir verwenden ausschließlich hochwertige Produkte und
-          legen großen Wert auf Nachhaltigkeit.
-        </p>
-      </div>
-    </section>
-
-    <footer id="kontakt">
-      <div class="footer-grid">
-        <div>
-          <h3>Coiffure Chic</h3>
-          <p>Ihr Friseursalon für Stil und Eleganz – herzlich willkommen.</p>
-        </div>
-        <div>
-          <h3>Kontakt</h3>
-          <p>Hauptstrasse 93<br />4450 Sissach</p>
-          <p>Tel: <a href="tel:+41619715141">061 971 51 41</a><br /></p>
-        </div>
-        <div>
-          <h3>Öffnungszeiten</h3>
-          <ul>
-            <li>Montag: geschlossen</li>
-            <li>Dienstag bis Freitag: 08:00 - 12:00, 13:00 - 18:00</li>
-            <li>Samstag: 07:00 - 14:00</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Folgen Sie uns</h3>
-          <ul class="social-links">
-            <li>
-              <a
-                href="https://www.instagram.com/_coiffurechic/"
-                target="_blank"
-                rel="noopener"
-                aria-label="Instagram"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+    <div class="app-container" id="appContainer">
+        <!-- ==================== PASSCODE SCREEN ==================== -->
+        <div class="passcode-screen" id="passcodeScreen">
+            <div class="brand-strip"></div>
+            <div class="brand-dot"></div>
+            <span class="airplane-icon-top">🛫</span>
+            <h2>Pronto per decollare?</h2>
+            <p class="subtitle">Inserisci il tuo codice di viaggio per visualizzare i dettagli</p>
+            <div class="passcode-input-wrapper">
+                <span class="lock-icon">🔒</span>
+                <input
+                type="text"
+                id="passcodeInput"
+                placeholder="··········"
+                maxlength="20"
+                autocomplete="off"
+                spellcheck="false"
                 >
-                  <rect x="3" y="3" width="18" height="18" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.facebook.com/CoiffureChicSissach/"
-                target="_blank"
-                rel="noopener"
-                aria-label="Facebook"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.6 1.6-1.6h1.7V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.6H7.7V14h2.7v8h3.1z"
-                  />
-                </svg>
-              </a>
-            </li>
-          </ul>
+            </div>
+            <button class="passcode-submit-btn" id="submitBtn">Accedi</button>
+            <p class="error-message" id="errorMessage"></p>
         </div>
-      </div>
-      <div class="footer-bottom">
-        © 2026 Coiffure Chic · Alle Rechte vorbehalten ·
-        <a href="#">Impressum</a> · <a href="#">Datenschutz</a>
-      </div>
-    </footer>
 
-    <div
-      id="price-modal"
-      class="price-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="price-modal-title"
-      aria-hidden="true"
-    >
-      <div class="price-modal-backdrop" data-close-price-modal="true"></div>
-      <div class="price-modal-content">
-        <div class="price-modal-header">
-          <h3 id="price-modal-title">Detaillierte Preisliste</h3>
-          <button
-            class="price-modal-close"
-            id="close-price-modal"
-            type="button"
-            aria-label="Schließen"
-          >
-            ×
-          </button>
+        <!-- ==================== TRAVEL INFO SCREEN ==================== -->
+        <div class="travel-screen" id="travelScreen">
+            <!-- Orange header -->
+            <div class="travel-header-strip">
+                <div class="logo-area">
+                    <div class="logo-circle">ej</div>
+                    <span class="logo-text">easyJourney</span>
+                </div>
+                <div class="flight-badge">✈️ Confermato</div>
+            </div>
+
+            <!-- Boarding pass -->
+            <div class="boarding-pass-body">
+                <div class="flight-route">
+                    <span class="city-code">CASA</span>
+                    <span class="route-arrow">
+                        <span class="line-dot"></span>
+                        <span class="line-seg"></span>
+                        <span class="route-plane">✈️</span>
+                        <span class="line-seg"></span>
+                        <span class="line-dot"></span>
+                    </span>
+                    <span class="city-code">🌴</span>
+                </div>
+                <div class="flight-meta-row">
+                    <div class="flight-meta-item">
+                        <div class="meta-label">Partenza</div>
+                        <div class="meta-value">Sabato</div>
+                    </div>
+                    <div class="flight-meta-item">
+                        <div class="meta-label">Orario</div>
+                        <div class="meta-value">Pomeriggio</div>
+                    </div>
+                    <div class="flight-meta-item">
+                        <div class="meta-label">Durata</div>
+                        <div class="meta-value">4 giorni</div>
+                    </div>
+                    <div class="flight-meta-item">
+                        <div class="meta-label">Notti</div>
+                        <div class="meta-value">3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info cards -->
+            <div class="info-cards" style="padding: 8px 24px 6px;">
+                <div class="info-card">
+                    <div class="card-emoji">👕</div>
+                    <div class="card-content">
+                        <div class="card-title">Abbigliamento</div>
+                        <div class="card-detail">Vestiti per 3 notti e 4 giorni — leggeri e comodi</div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="card-emoji">🕶️</div>
+                    <div class="card-content">
+                        <div class="card-title">Occhiali da sole</div>
+                        <div class="card-detail">Il sole ti aspetta! Non dimenticarli 🌞</div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="card-emoji">🪪</div>
+                    <div class="card-content">
+                        <div class="card-title">Documento d'identità</div>
+                        <div class="card-detail">Porta con te un documento ID valido</div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="card-emoji">🧳</div>
+                    <div class="card-content">
+                        <div class="card-title">Bagaglio</div>
+                        <div class="card-detail">È consentito un trolley a mano</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather -->
+            <div class="weather-strip">
+                <span class="weather-icon-large">⛅</span>
+                <div class="weather-details">
+                    <div class="weather-temp-day">🌤️ 20° – 22°C di giorno</div>
+                    <div class="weather-temp-night">🌙 Intorno ai 15°C di notte</div>
+                </div>
+                <span class="weather-sun">Clima<br>mite</span>
+            </div>
+
+            <!-- Footer -->
+            <div class="travel-footer">
+                <div class="footer-barcode" id="barcodeLines"></div>
+                <span class="footer-note">🎉 Prenotazione speciale</span>
+                <span class="footer-emoji">🎂✨</span>
+            </div>
         </div>
-        <div class="price-modal-body">
-          <section class="price-section">
-            <h4>Damen</h4>
-            <table class="price-table">
-              <thead>
-                <tr>
-                  <th>Leistung</th>
-                  <th>Währung</th>
-                  <th>Bis Kinnlang</th>
-                  <th>Ab Kinnlang</th>
-                  <th>Ab Schulterlang</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Waschen, Schneiden, Föhnen / Legen</td>
-                  <td>CHF</td>
-                  <td>77.00</td>
-                  <td>84.00</td>
-                  <td>90.00</td>
-                </tr>
-                <tr>
-                  <td>Waschen, Schneiden selber Föhnen</td>
-                  <td>CHF</td>
-                  <td>56.00</td>
-                  <td>56.00</td>
-                  <td>56.00</td>
-                </tr>
-                <tr>
-                  <td>Trockenschneiden, ohne Waschen &amp; Föhnen</td>
-                  <td>CHF</td>
-                  <td>45.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Schneiden nass &amp; Föhnen</td>
-                  <td>CHF</td>
-                  <td>69.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Waschen, Föhnen, Legen</td>
-                  <td>CHF</td>
-                  <td>41.00</td>
-                  <td>47.00</td>
-                  <td>53.00</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-
-          <section class="price-section">
-            <h4>Coloration</h4>
-            <table class="price-table">
-              <thead>
-                <tr>
-                  <th>Leistung</th>
-                  <th>Währung</th>
-                  <th>Bis Kinnlang</th>
-                  <th>Ab Kinnlang</th>
-                  <th>Ab Schulterlang</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Ansatz färben / blondieren</td>
-                  <td>CHF</td>
-                  <td>54.00</td>
-                  <td>54.00</td>
-                  <td>54.00</td>
-                </tr>
-                <tr>
-                  <td>Ansatz färben (ammoniakfrei)</td>
-                  <td>CHF</td>
-                  <td>59.00</td>
-                  <td>59.00</td>
-                  <td>59.00</td>
-                </tr>
-                <tr>
-                  <td>Farbe ganzer Kopf</td>
-                  <td>CHF</td>
-                  <td>66.00</td>
-                  <td>69.00</td>
-                  <td>73.00</td>
-                </tr>
-                <tr>
-                  <td>Farbe ganzer Kopf (ammoniakfrei) * ELUMEN</td>
-                  <td>CHF</td>
-                  <td>64.00</td>
-                  <td>71.00</td>
-                  <td>79.00</td>
-                </tr>
-                <tr>
-                  <td>Ansatz färben Längenausgleich mit Tönung</td>
-                  <td>CHF</td>
-                  <td>66.00</td>
-                  <td>73.00</td>
-                  <td>81.00</td>
-                </tr>
-                <tr>
-                  <td>
-                    Ansatz färben (ammoniakfrei) Längenausgleich mit Tönung
-                  </td>
-                  <td>CHF</td>
-                  <td>73.00</td>
-                  <td>80.00</td>
-                  <td>88.00</td>
-                </tr>
-                <tr>
-                  <td>Tönung / Glanztönung</td>
-                  <td>CHF</td>
-                  <td>28.00</td>
-                  <td>33.00</td>
-                  <td>38.00</td>
-                </tr>
-                <tr>
-                  <td>Intensivtönung mit langer Haltbarkeit</td>
-                  <td>CHF</td>
-                  <td>48.00</td>
-                  <td>53.00</td>
-                  <td>58.00</td>
-                </tr>
-                <tr>
-                  <td>Farbe / Material Zuschlag / Arbeitsaufwand</td>
-                  <td>CHF</td>
-                  <td>10.00</td>
-                  <td>15.00</td>
-                  <td>20.00</td>
-                </tr>
-                <tr>
-                  <td>Folienmèches Oberkopf</td>
-                  <td>CHF</td>
-                  <td>64.00</td>
-                  <td>85.00</td>
-                  <td>106.00</td>
-                </tr>
-                <tr>
-                  <td>Folienmèches ganzer Kopf</td>
-                  <td>CHF</td>
-                  <td>87.00</td>
-                  <td>110.00</td>
-                  <td>131.00</td>
-                </tr>
-                <tr>
-                  <td>Balayage ohne Tönung</td>
-                  <td>CHF</td>
-                  <td></td>
-                  <td>125.00</td>
-                  <td>143.00</td>
-                </tr>
-                <tr>
-                  <td>Blondieren ganzer Kopf</td>
-                  <td>CHF</td>
-                  <td>80.00</td>
-                  <td>90.00</td>
-                  <td>105.00</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-
-          <section class="price-section">
-            <h4>Umformungen</h4>
-            <table class="price-table">
-              <thead>
-                <tr>
-                  <th>Leistung</th>
-                  <th>Währung</th>
-                  <th>Bis Kinnlang</th>
-                  <th>Ab Kinnlang</th>
-                  <th>Ab Schulterlang</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Dauerhafte Umformung</td>
-                  <td>CHF</td>
-                  <td>90.00</td>
-                  <td>100.00</td>
-                  <td>105.00</td>
-                </tr>
-                <tr>
-                  <td>Volumenwelle / Teildauerwelle</td>
-                  <td>CHF</td>
-                  <td>80.00</td>
-                  <td>85.00</td>
-                  <td>95.00</td>
-                </tr>
-                <tr>
-                  <td>Keratinglättung, inkl. Schnitt &amp; Föhnen</td>
-                  <td>CHF</td>
-                  <td>375.00</td>
-                  <td>425.00</td>
-                  <td>475.00</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-
-          <section class="price-section">
-            <h4>Pflegeprodukte / Sonstiges</h4>
-            <table class="price-table">
-              <thead>
-                <tr>
-                  <th>Leistung</th>
-                  <th>Währung</th>
-                  <th>Bis Kinnlang</th>
-                  <th>Ab Kinnlang</th>
-                  <th>Ab Schulterlang</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Spülung / Feuchtigkeitspflege</td>
-                  <td>CHF</td>
-                  <td>4.00</td>
-                  <td>5.00</td>
-                  <td>8.00</td>
-                </tr>
-                <tr>
-                  <td>Maske</td>
-                  <td>CHF</td>
-                  <td>12.00</td>
-                  <td>15.00</td>
-                  <td>18.00</td>
-                </tr>
-                <tr>
-                  <td>Olaplex Nummer 1 + 2 bei Coloration + Mèches</td>
-                  <td>CHF</td>
-                  <td>13.00</td>
-                  <td>13.00</td>
-                  <td>18.00</td>
-                </tr>
-                <tr>
-                  <td>Olaplex Nummer 1 + 2 für den Haaraufbau</td>
-                  <td>CHF</td>
-                  <td>32.00</td>
-                  <td>32.00</td>
-                  <td>42.00</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-
-          <section class="price-section">
-            <h4>Kosmetik</h4>
-            <table class="price-table">
-              <thead>
-                <tr>
-                  <th>Leistung</th>
-                  <th>Währung</th>
-                  <th>Bis Kinnlang</th>
-                  <th>Ab Kinnlang</th>
-                  <th>Ab Schulterlang</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Wimpern färben</td>
-                  <td>CHF</td>
-                  <td>20.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Augenbrauen färben / zupfen</td>
-                  <td>CHF</td>
-                  <td>16.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Augenbrauen färben &amp; zupfen</td>
-                  <td>CHF</td>
-                  <td>10.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Aufsteckfrisuren im Minuten-Aufwand</td>
-                  <td>CHF</td>
-                  <td>1.50</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Hochzeitsfrisur, inkl. 1 Probefrisur</td>
-                  <td>CHF</td>
-                  <td>180.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-
-          <section class="price-section">
-            <h4>Herren</h4>
-            <table class="price-table">
-              <thead>
-                <tr>
-                  <th>Leistung</th>
-                  <th>Währung</th>
-                  <th>Bis Kinnlang</th>
-                  <th>Ab Kinnlang</th>
-                  <th>Ab Schulterlang</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Waschen, Schneiden, Föhnen</td>
-                  <td>CHF</td>
-                  <td>46.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Waschen, Schneiden</td>
-                  <td>CHF</td>
-                  <td>42.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Trockenhaarschnitt</td>
-                  <td>CHF</td>
-                  <td>36.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Maschinen / Kranzhaarschnitt</td>
-                  <td>CHF</td>
-                  <td>29.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Alle andern DL-Preise wie Damen bis kinnlanges Haar</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-
-          <section class="price-section">
-            <h4>Kinder</h4>
-            <table class="price-table">
-              <thead>
-                <tr>
-                  <th>Leistung</th>
-                  <th>Währung</th>
-                  <th>Bis Kinnlang</th>
-                  <th>Ab Kinnlang</th>
-                  <th>Ab Schulterlang</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Waschen, Schneiden, Stylen, Jungen</td>
-                  <td>CHF</td>
-                  <td>33.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Nur Waschen Mädchen</td>
-                  <td>CHF</td>
-                  <td>6.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Schneiden bis 12 Jahre</td>
-                  <td>CHF</td>
-                  <td>29.00</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>
-                    Mädchen 13 - 16 Jahre Waschen, Schneiden, Föhnen, oder
-                    Pflege
-                  </td>
-                  <td>CHF</td>
-                  <td>42.00</td>
-                  <td>47.00</td>
-                  <td>52.00</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-
-          <p class="price-note">
-            Lehrlinge &amp; Studenten erhalten auf den Erwachsenen-Preis 10%.
-          </p>
-        </div>
-      </div>
     </div>
 
+    <!-- Confetti container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
     <script>
-      const openPriceModalButton = document.getElementById("open-price-modal");
-      const closePriceModalButton =
-        document.getElementById("close-price-modal");
-      const priceModal = document.getElementById("price-modal");
+        (function() {
+            const CORRECT_PASSCODE = 'FROM59TO60';
 
-      function openPriceModal() {
-        priceModal.classList.add("is-open");
-        priceModal.setAttribute("aria-hidden", "false");
-        document.body.classList.add("no-scroll");
-      }
+            const passcodeScreen = document.getElementById('passcodeScreen');
+            const travelScreen = document.getElementById('travelScreen');
+            const passcodeInput = document.getElementById('passcodeInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const errorMessage = document.getElementById('errorMessage');
+            const appContainer = document.getElementById('appContainer');
+            const confettiContainer = document.getElementById('confettiContainer');
+            const barcodeLines = document.getElementById('barcodeLines');
 
-      function closePriceModal() {
-        priceModal.classList.remove("is-open");
-        priceModal.setAttribute("aria-hidden", "true");
-        document.body.classList.remove("no-scroll");
-      }
+            // Generate barcode lines
+            function generateBarcode() {
+                const heights = [28, 36, 22, 40, 18, 32, 44, 20, 38, 26, 34, 42, 24, 30, 38, 22, 36, 28, 40, 18, 32,
+                    44, 20, 34, 26, 38, 22, 30, 42, 24, 36, 18, 40, 28, 32, 44, 20, 34, 26, 38, 22, 30, 42, 24, 36, 18,
+                    40, 28
+                ];
+                barcodeLines.innerHTML = heights.map(h =>
+                    `<span class="barcode-line" style="height:${h}px;"></span>`
+                ).join('');
+            }
+            generateBarcode();
 
-      openPriceModalButton.addEventListener("click", openPriceModal);
-      closePriceModalButton.addEventListener("click", closePriceModal);
+            // Spawn confetti
+            function spawnConfetti() {
+                const colors = [
+                    '#FF6B00', '#FF8C33', '#FFB380', '#FFD1B3',
+                    '#FF4500', '#FFA500', '#FFD700', '#FF6347',
+                    '#FFFFFF', '#FFF5EE', '#FFE4CC', '#FF9966',
+                    '#FF7B24', '#FF9F5C', '#FFC494', '#E55F00',
+                ];
+                const fragment = document.createDocumentFragment();
+                const count = 120;
 
-      priceModal.addEventListener("click", (event) => {
-        if (event.target.matches("[data-close-price-modal='true']")) {
-          closePriceModal();
-        }
-      });
+                for (let i = 0; i < count; i++) {
+                    const piece = document.createElement('div');
+                    piece.classList.add('confetti-piece');
+                    piece.style.left = Math.random() * 100 + '%';
+                    piece.style.top = -(Math.random() * 40 + 10) + 'px';
+                    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.width = (Math.random() * 10 + 6) + 'px';
+                    piece.style.height = (Math.random() * 10 + 6) + 'px';
+                    piece.style.animationDuration = (Math.random() * 2 + 2.2) + 's';
+                    piece.style.animationDelay = Math.random() * 1.2 + 's';
+                    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                    fragment.appendChild(piece);
+                }
+                confettiContainer.appendChild(fragment);
 
-      document.addEventListener("keydown", (event) => {
-        if (
-          event.key === "Escape" &&
-          priceModal.classList.contains("is-open")
-        ) {
-          closePriceModal();
-        }
-      });
+                // Clean up after animation
+                setTimeout(() => {
+                    confettiContainer.innerHTML = '';
+                }, 4000);
+            }
+
+            // Show travel screen
+            function showTravelScreen() {
+                // Adjust container height
+                const passcodeHeight = passcodeScreen.offsetHeight;
+                appContainer.style.minHeight = passcodeHeight + 'px';
+
+                // Hide passcode, show travel
+                passcodeScreen.classList.add('hidden');
+                travelScreen.classList.add('visible');
+
+                // Spawn confetti
+                spawnConfetti();
+
+                // After transition, reset container min-height
+                setTimeout(() => {
+                    appContainer.style.minHeight = 'auto';
+                }, 600);
+
+                // Scroll to top smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Check passcode
+            function checkPasscode() {
+                const entered = passcodeInput.value.trim().toUpperCase();
+
+                if (entered === CORRECT_PASSCODE) {
+                    errorMessage.textContent = '';
+                    passcodeInput.classList.remove('error-shake');
+                    showTravelScreen();
+                } else {
+                    // Show error
+                    errorMessage.textContent = '❌ Codice non valido. Riprova.';
+                    passcodeInput.classList.add('error-shake');
+                    passcodeInput.focus();
+                    passcodeInput.select();
+
+                    // Remove shake class after animation
+                    setTimeout(() => {
+                        passcodeInput.classList.remove('error-shake');
+                    }, 550);
+                }
+            }
+
+            // Event listeners
+            submitBtn.addEventListener('click', checkPasscode);
+
+            passcodeInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkPasscode();
+                }
+                // Clear error on new input
+                if (errorMessage.textContent) {
+                    errorMessage.textContent = '';
+                    passcodeInput.classList.remove('error-shake');
+                }
+            });
+
+            // Auto-focus input
+            setTimeout(() => {
+                passcodeInput.focus();
+            }, 400);
+
+            // Click on container to refocus input if on passcode screen
+            document.addEventListener('click', function(e) {
+                if (!passcodeScreen.classList.contains('hidden') &&
+                    !e.target.closest('input') &&
+                    !e.target.closest('button')) {
+                    passcodeInput.focus();
+                }
+            });
+
+            // Handle paste event - clean up the pasted text
+            passcodeInput.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+                const cleaned = pastedText.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+                passcodeInput.value = cleaned;
+                // Trigger input event
+                passcodeInput.dispatchEvent(new Event('input', { bubbles: true }));
+            });
+
+            // Prevent spaces in input
+            passcodeInput.addEventListener('input', function() {
+                this.value = this.value.replace(/\s/g, '');
+            });
+
+            console.log('🛫 EasyJourney — Inserisci il passcode per visualizzare i dettagli del viaggio.');
+            console.log('💡 Suggerimento: il codice è "FROM59TO60"');
+        })();
     </script>
-  </body>
+</body>
 </html>
